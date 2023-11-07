@@ -7,8 +7,8 @@ services:
         ports:
             - 5000:5000
         volumes:
-            - ../vroom_final/:/data
-        command: "osrm-routed --max-matching-size 1000 --max-table-size 1000 --max-viaroute-size 1000 --algorithm mld /data/sachsen-anhalt-latest.osrm"
+            - ../vroom-west/:/data
+        command: "osrm-routed --max-matching-size 10000 --max-table-size 10000  --max-viaroute-size 10000 --algorithm mld /data/us-west-latest.osrm"
         networks:
             tsp_network:
                 aliases:
@@ -31,10 +31,10 @@ services:
                 - vroom-backend
     vroom-frontend:
         container_name: vroom-frontend
-        image: vroom-frontend
+        image: knightblood/vroom-frontend:latest
         restart: always
         ports:
-            - 9966:9966
+            - 8050:9966
         depends_on:
             - osrm
             - vroom-backend
